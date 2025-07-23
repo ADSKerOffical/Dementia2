@@ -1,0 +1,57 @@
+Чтобы создать класс то нужно использовать функцию Instance.new(class: string, parent: Instance)
+А также есть Instance.fromExisting который копирует Instance без его дочерних объектов
+Для создания класс можно использовать такой пример: 
+
+{
+local Part = Instance.new("Part", game.Workspace)
+Part.Name = "BasicPart"
+}
+
+или можно так
+
+{
+local Part = Instance.new("Part")
+Part.Name = "BasicPart"
+Part.Parent = game.Workspace
+}
+
+У Instance также есть параметры, методы и сигналы которые можно использовать для любого Instance
+Но есть и параметры которые нельзя изменить или они скрыты или их даже нельзя получить
+Некоторые классы нельзя удалить например сервис, Terrain, game и некоторые классы
+И их нельзя использовать таким образом:
+
+{
+  Model.Part = nil
+  Model.Part = Instance.new("Part")
+}
+
+Классы это можно сказать метатаблицы и поэтому для поиска параметра можно использовать так: part["Name"]
+
+?[
+Если нужно удалить объект, то можно использовать instance:Destroy()
+Если нужно удалить все дочерние объекты, то можно использовать instance:ClearAllChildren()
+Если нужно возобновить параметр (поставить его по умолчанию) то можно использовать instance:ResetPropertyToDefault(propName: string)
+
+Если нужно скопировать объект то можно использовать instance:Clone()
+Функция копирует все параметры и его потомки, но не копирует его сигналы (если скопировано не через студио)
+
+Если надо найти дочерний класс у класса по имени то можно можно использовать instance:FindFirstChild(instName: string)
+Для FindFirstChild и FindFirstChildWhichIsA есть второй аргумент и он будет искать не только дочерние объекты, но и потомки, тоесть эквивалентно FindFirstDescendant (Например instance:FindFirstChild("Key", true))
+
+Если надо найти дочерний класс по его классу то можно использовать instance:FindFirstChildOfClass(className: string)
+Если надо найти первый ближайший потомок по его имени, то можно использовать instance:FindFirstDescendant(instName: string)
+Если надо найти дочерний класс по его классу и он будет выполнять метод IsA (Чтобы искать и абстрактные классы) можно использовать instance:FindFirstChildWhichIsA(className: string)
+
+Если нужно найти родитель по его имени то можно использовать instance:FindFirstAncestor(name: string)
+Если нужно найти родитель по его классу то можно использовать instance:FindFirstAncestorOfClass(className: string)
+
+Если нужно проверить является ли класс потомком этого класса, то можно использовать instance:IsDescendantOf(inst: Instance)
+Если нужно проверить является ли класс родителем этого класса, то можно использовать instance:IsAncestorOf(inst: Instance)
+]
+
+Если надо подождать пока будет дочерний класс по имени то можно использовать instance:WaitForChild(instName: string, delay: number)
+delay это время которое нужно подождать до предупреждения (по умолчанию 5)
+
+Для классов можно сделать атрибут с помощью Instance:SetAttribute(name: string, value)
+Чтобы получить значение атрибута нужно использовать Instance:GetAttribute(name: string)
+В значении можно поставить любое значение, но нельзя поставить Dictionary таблицу
