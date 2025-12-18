@@ -1,0 +1,27 @@
+Object: всё – Один суперкласс для абсолютно всех Instance
+BasePart: Part, MeshPart, UnionOperation, SeatPart, WedgePart и т.д – Класс для всех частей
+BaseScript: Script, LocalScript, ModuleScript – Класс для всех видов скриптов которые выполняют что-то
+LuaSourceContainer: Script, LocalScript, ModuleScript – Класс для всех видов скриптов которые просто что-то хранят, но не выполняют
+Light: PointLight, SurfaceLight, SpotLight – Класс для всех видов классов которые освещают местность
+Effect: Fire, Sparkles, Smoke – Класс для всех спец эффектов
+GuiBase: ScreenGui, Frame, LayerCollector – Класс для всех 2D классов в том числе и GuiObjects
+GuiObject: TextButton, ImageButton, TextLabel и т.д – Класс для всех 2D классов которые дополняют GuiBase
+ValueBase: StringValue, NumberValue, ObjectValue, BoolValue, IntValue, BinaryStringValue – Класс для всех скриптов которые можно изменять прямо в игре
+UIBase: UICorner, UIBorder – Классы которые украшают GuiObject
+BodyMover: BodyVelocity, BodyGyro, BodyPosition, BodyAngularVelocity – Класс для всех объектов которые двигают объекты
+SoundEffect: EchoSoundEffect – Класс для всех звуковых эффектов
+BasePlayerGui: CoreGui, PlayerGui, StarterGui – Класс для всех классов для хранения Gui
+BaseRemoteEvent: RemoteEvent – Класс для RemoteEvent
+Clothing: Shirt, Pants – Класс для всех классов связаны с одеждой
+Constraint: Torque, AngularVelocity, LineVelocity – Дополнение к BodyMover
+FaceInstance: Decal, Texture – Класс для наклеек
+JointInstance: Weld, Motor6D, Glue, Snap – Класс для всех классов которые соединяют объекты
+CoreScript: Script, LocalScript – Почти тоже самое что и BaseScript
+PostEffect: ColorCorrectionEffect, BloomEffect, BlurEffect – Класс для всех глобальных эффектов
+TweenBase: Tween – Класс для Tween объектов
+Accoutrement: Accessory, Hat – Класс для всех классов которые связаны с аксессуарами
+CharacterAppearance: BodyColors, CharacterMesh, Clothing – Класс для всех классов которые изменяют появление модели игрока
+ControllerBase: AirController, ClimbController, SwimController – Класс для всех классов которые изменяют поведение состояний игроков
+DataModelMesh: SpecialMesh, BlockMesh, FileMesh – Клаас для всех классов которые создают Mesh
+Pages: BanHistoryPages, AudioPages – Класс для всех классов которые связаны с страницами (у сайтов)
+ServiceProvider: GlobalSettings, UserSettings – Класс для всех сервисов
