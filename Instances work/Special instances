@@ -1,0 +1,33 @@
+Некоторые сервисы или классы в роблоксе нельзя получить через Instance и вот многие из них и как их получить:
+
+Методы получения: {
+  Instance: {
+    Обычный способ: Instance.new(className: string, parent: Instance): Instance
+  }
+   
+  Service: {
+    Обычный способ: game:GetService(serviceName: string)
+  }
+}
+
+GlobalSettings – settings()
+DebugSettings – settings().Diagnostics
+NetworkSettings – settings().Network
+LuaSettings – settings().Lua
+PhysicsSettings – settings().Physics
+RenderSettings – settings().Render
+Service – game:GetService(serviceName: string)
+UserSettings – UserSettings()
+UserGameSettings – UserSettings():GetService("UserGameSettings")
+AnimationTrack – (Animator или Humanoid с Animator):LoadAnimation(Animation: Instance)
+AnimationClip – game:GetService("AnimationClipProvider"):GetAnimationClipAsync(assetid: double)
+PlayerMouse – LocalPlayer:GetMouse()
+Camera – Workspace.CurrentCamera
+BanHistoryPages – game.Players:GetBanHistoryAsync(userId: int)
+RunningAverageItemInt/StatsItem – game:GetService("Stats").Network.ServerStatsItem["Data Ping"] -- Для примера
+Path – game:GetService("PathfindingService"):CreatePath()
+PluginManager – PluginManager()
+PlayerGui – Player.PlayerGui
+InputObject – При сигнале UserInputService.InputBegan или похожих сигналов
+NetworkReplicator – не удалось найти способ
+<<<ROOT>>> – Это эквивалентно game
