@@ -1,0 +1,22 @@
+Threads:
+
+При выполнении скрипта используется основной поток (последовательность) скрипта. Циклы по типу while, repeat и даже for тормозят основной поток.
+А также тормозят основной поток RemoteFunction или те методы у классов, которые помечены "Yields"
+Пример:
+
+while task.wait() do end
+print("Done") -- Этот поток больше не сработает
+print("Done2")
+
+Однако для решения этой проблемы есть функции: task.spawn, coroutine.wrap
+Пример:
+
+task.spawn(function()
+  while task.wait() do end
+end)
+print("Done") -- Вызовется так как бесконечный цикл находится в другом потоке
+
+coroutine.wrap(function()
+  while task.wait() do end
+end)()
+print("Done2")
