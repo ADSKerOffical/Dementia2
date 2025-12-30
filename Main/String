@@ -1,0 +1,178 @@
+               • Chapter 1 •
+               
+В роблоксе строки это важнейшая часть в скриптинге. Они скрывают больше тонкостей чем почти все типы данных
+Для того чтобы обозначить строку нужно использовать кавычки: " " или ' ' или ` `
+Чтобы перенести строку то нужно использовать " .. "
+! Можно переносить только строку, а при попытке других типов данных выведет ошибку
+Например: 
+  local text = "Denis"
+  print("My name is " .. text) -- My name is Denis
+  
+Но у кавычек ` ` есть особенность которая позволяет удобнее переносить (скорее преобразовать) строки, а именно с помощью фигурных скобок
+Например:
+  local id = game.Players.LocalPlayer.UserId
+  print(`Player has id: {id}`) -- Player has id: 123456789 (это пример)
+  
+Также для обозначения строки можно использовать "[[ ]]", которые позволят вставлять текст с 2 и более пробелами
+А также эти строки работают с комментариями
+Например:
+  local text = [[
+    ...
+    It is text with 2 lines
+  ]]
+  print(text) -- ...
+  -- It is text with 2 lines
+  
+Также есть глобальная функция tostring, которая позволяет преобразовать почти любой тип данных в строку
+Например:
+  local id = game.Players.LocalPlayer.UserId
+  print("My name is: " .. tostring(id))
+               
+               • Chapter 2 •
+   
+Для работы с строками существуют несколько библиотек: string, utf8, buffer. Эти библиотеки (особенно string) играют важнейшую роль в строках
+Библиотеку string можно использовать даже не используя саму библиотеку, а просто из текста
+Например:
+  print(("It is a text"):upper()) -- IT IS A TEXT
+  print(part.Name:lower():find("kill")) -- и т.д
+  
+А вот все функции у библиотек string и utf8
+
+string.byte(char: string): int – получает байт кода 
+  Например английская "a" это 97, а русская "а" это 208
+  
+string.char(byte: int): string – преобразует байт кода символа в обычный символ
+  
+string.find(text: string, charOrWord: string): boolean, numFind: int – находит символ в строке и возвращает true если это так и количество таких найденных символов
+  Например:
+    for _, part in workspace:GetChildren() do
+      if part:IsA("BasePart") and string.find(part.Name, "Kill") then
+        part:Destroy()
+      end
+    end
+
+string.gsub(text: string, replaceChar: string, replaceCharTo: string): string – преобразует символ в строке на другой символ или текст
+  Например:
+    local text = "Книга"
+    print(string.gsub(text, "К", ""))
+
+string.lower(text: string): string – делает все заглавные буквы строчными
+  Например:
+    local text = "ITs A TExT"
+    print(string.lower(text)) -- its a text
+
+string.upper(text: string): string – делает все строчные буквы заглавными
+  Например:
+    local text = "its a text"
+    print(string.upper(text)) -- ITS A TEXT
+
+string.rep(text: string, repeat: int): string – повторяет текст определённое количество раз
+  Например:
+    local text = "a "
+    print(string.rep(text, 4)) -- a a a a 
+
+string.len(text: string): int – узнаёт сколько всего символов в строке
+  Например:
+    print(string.len("In this text a few symbols")) -- 26
+
+string.reverse(text: string): string – получает текст в инверсии
+  Например:
+    local text = "txet a stI"
+    print(string.reverse(text)) -- Its a text
+
+string.split(text: string, splitChar: string): table – делает так чтобы символ разделял текст на части
+  Например:
+    local text = "Its a text"
+    for _, word in next, string.split(text, " ") do
+      print(word) -- Its
+      -- a
+      -- text
+    end
+
+string.sub(text: string, indexStart: number, indexEnd: number): string – возвращает подстроку из text, которая начинается с indexStart и продолжается до indexEnd включительно. indexStart и indexEnd могут быть отрицательными. indexStart по умолчанию равно 1, а indexEnd по умолчанию равно -1
+  Например:
+    local text, new = "Its a text", ""
+   for i = 1, string.len(text) do
+     local char = string.sub(text, i, i)
+     new = new .. (i % 2 == 0 and char:upper() or char:lower())
+   end
+   print(new) -- iTs a tExT
+
+string.format(text: string, ...: string): variant – возвращает отформатированную версию переменной величины, содержащей аргументы, в соответствии с описанием, указанным в первом аргументе, который должен быть строкой
+Это мощная функция которая имеет множество особенностей например:
+
+string.format("0x%X", num: int) – преобразует число в Hex значение с префиксом 0x
+string.format("%.1e", num: number) – преобразует число в экспоненциальную запись (типо 1.1e12)
+string.format("%.1f", num: number) – сокращает число до целых (если будет 2f, то будет выводиться одно число после запятой)
+string.format("%.3s", text: string): string – сокращает длину строки до 3 символов
+
+  И с utf8:
+
+utf8.char(byte: int): string – эта функция эквивалентна функции string.char, однако у неё есть преимущество в том, что эта функция может преобразовать любой пронумерованный символ из UTF-8 и получить специальные символы (0xE000, 0xE001, 0xE002)
+  Например:
+    print(utf8.char(1041, 1080, 1090, 1072)) -- Бита
+
+utf8.codepoint(char: string): int – эквивалентно с string.byte, но ситуация та же самая с utf8.char
+
+utf8.len(text: string): int – возвращает количество UTF-8 codepoints в заданной строке
+
+utf8.graphemes(text: string): function – возвращает функцию-итератор, которая перебирает кластеры графем заданной строки
+
+utf8.codes(text: string): dictionary – возвращает позицию и байт код символа
+
+             • Chapter 3 •
+ 
+Для работ с символами существуют и "супер символы"
+Каждый из них обозначает разные действия и вот что они делают:
+
+%. – Любой символ
+%a – Заглавная или строчная буква
+%l – Только строчные буквы
+%u – Только заглавные буквы 
+%d – Только цифры
+%p – Только пунктуативные символы
+%w – Только буквы и цифры
+%s – Только пробел или whitespace символы
+%c – Только контроль символы
+%x – Только шестнадцатеричные символы
+%z – Только не прогруженные символы (\0)
+%i – Только целые числа
+%f – Только фиксированная десятичная форма числа
+%e – Только экспонентиальная форма числа
+%o – Только восьмиричные цифры
+%q – Возвращает 
+%s – Обозначает строку, которая экранированная или обозначена кавычками
+%% – Литерал %
+
+Механика:
+%d – Выделить числа которые являются числами
+%D – Выделить те символы которые не являются числами
+%d+ – Все символы данного типа (но это работает в match, gmatch, format)
+
+Примеры:
+  local test = "2Decal: Asset.1"
+
+  print(string.match(test, "%a")) -- D
+  print(string.match(test, "%a+")) -- Decal
+  print(string.match(test, "%A")) -- 2
+  print(string.match(test, "%A+")) -- 2
+
+  print(string.match(test, "%d")) -- 2
+  print(string.match(test, "%d+")) -- 2
+  print(string.match(test, "%D")) -- D
+  print(string.match(test, "%D+")) -- Decal: Asset.
+
+  print(string.match(test, "%p")) -- :
+  print(string.match(test, "%p+")) -- :
+  print(string.match(test, "%P")) -- 2
+  print(string.match(test, "%P+")) -- 2Decal
+  
+  print(string.match(test, "%w")) -- 2
+  print(string.match(test, "%w+")) -- 2Decal
+  print(string.match(test, "%W")) -- :
+  print(string.match(test, "%W+")) -- :
+  
+             • Chapter 4 •
+
+В роблоксе существуют так называемые Rich Text. Это как расширение для GuiObject с текстом, даже параметр есть для разрешения включения этой особенности, который так и называется RichText.
+RichText выглядит как формат строки в виде HTML: <p><font color="rgb(0, 255, 0)">hello</font></p>
